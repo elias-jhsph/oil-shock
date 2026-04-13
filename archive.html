@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — CRUDE / DISPATCHES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0806;
+    --bg-1: #14110c;
+    --bg-2: #1c1813;
+    --rule: #2a2218;
+    --rule-2: #3a3022;
+    --ink: #f4ead5;
+    --ink-dim: #c2b598;
+    --ink-faint: #7a6f5a;
+    --gold: #d4a017;
+    --amber: #ff8a00;
+    --blood: #e63946;
+    --sage: #5fb27d;
+    --steel: #8a92a6;
+    --crude: #2d1f0e;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 1200px 600px at 20% -10%, rgba(255,138,0,0.04), transparent 60%),
+      radial-gradient(ellipse 1000px 800px at 100% 30%, rgba(230,57,70,0.03), transparent 60%);
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+  @media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-dim);
+  }
+  .masthead-row { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+  .masthead .brand { color: var(--gold); font-weight: 600; letter-spacing: 0.2em; }
+  .masthead .brand::before { content: '\25C6 '; color: var(--amber); }
+  .masthead a { color: var(--amber); text-decoration: none; border: 1px solid var(--rule-2); padding: 6px 16px; transition: all 0.2s; }
+  .masthead a:hover { border-color: var(--amber); }
+
+  .page-header {
+    padding: 80px 0 40px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 60px;
+  }
+  .page-header h1 {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  }
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+  .page-header p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-dim);
+    max-width: 640px;
+    font-variation-settings: 'opsz' 24;
+  }
+
+  .dispatch-list { list-style: none; }
+  .dispatch-item {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.3s;
+  }
+  .dispatch-item:first-child { border-top: 1px solid var(--rule); }
+  .dispatch-item:hover { background: var(--bg-1); }
+  .dispatch-item a {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 32px;
+    align-items: center;
+    padding: 32px 24px;
+    text-decoration: none;
+    color: inherit;
+  }
+  @media (max-width: 720px) {
+    .dispatch-item a { grid-template-columns: 1fr; gap: 12px; padding: 24px 16px; }
+  }
+  .dispatch-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
+  .dispatch-date .day {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    font-variation-settings: 'opsz' 144;
+  }
+  .dispatch-body h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .dispatch-body .edition {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .dispatch-body p {
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+    max-width: 600px;
+  }
+  .dispatch-arrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .dispatch-item:hover .dispatch-arrow { color: var(--amber); }
+
+  .current-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--bg);
+    background: var(--gold);
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 40px 0;
+    margin-top: 80px;
+  }
+  footer .colophon {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <div class="brand">CRUDE / DISPATCHES</div>
+    <a href="oil-shock.html">Current Dispatch &rarr;</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="page-header">
+  <h1>Dispatch <em>archive.</em></h1>
+  <p>Every edition of the oil shock forecast, preserved as published. The situation evolved; the analysis evolved with it.</p>
+</div>
+
+<ul class="dispatch-list">
+
+  <li class="dispatch-item">
+    <a href="oil-shock.html">
+      <div class="dispatch-date">
+        <span class="day">13</span>
+        Apr 2026
+      </div>
+      <div class="dispatch-body">
+        <div class="edition">Vol. I No. 02 &mdash; Blockade Edition <span class="current-badge">Current</span></div>
+        <h3>The lull is over.</h3>
+        <p>Islamabad talks collapse after 21 hours. Trump orders naval blockade of Iranian ports. Scenario probabilities shift to 10/45/45. Every price forecast revised upward $8&ndash;15/bbl.</p>
+      </div>
+      <div class="dispatch-arrow">Read &rarr;</div>
+    </a>
+  </li>
+
+  <li class="dispatch-item">
+    <a href="archive-apr-8.html">
+      <div class="dispatch-date">
+        <span class="day">8</span>
+        Apr 2026
+      </div>
+      <div class="dispatch-body">
+        <div class="edition">Vol. I No. 01 &mdash; Ceasefire Edition</div>
+        <h3>The lull before the reckoning.</h3>
+        <p>A 39-day war removed up to 9.1 million barrels a day from global markets. The ceasefire bought time. It did not buy supply. Scenario-weighted 12-month forecast with facility-level damage assessment.</p>
+      </div>
+      <div class="dispatch-arrow">Read &rarr;</div>
+    </a>
+  </li>
+
+</ul>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <span>CRUDE / DISPATCHES &nbsp;&middot;&nbsp; ARCHIVE</span>
+      <span>Set in Fraunces &amp; IBM Plex</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
