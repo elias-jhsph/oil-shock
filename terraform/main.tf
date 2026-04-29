@@ -46,7 +46,7 @@ resource "google_cloud_run_v2_service" "site" {
     }
 
     containers {
-      image = "${var.region}-docker.pkg.dev/${var.project_id}/oil-shock/site:latest"
+      image = "${var.region}-docker.pkg.dev/${var.project_id}/oil-shock/site:${var.image_tag}"
 
       ports {
         container_port = 8080
